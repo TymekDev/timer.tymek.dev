@@ -5,6 +5,9 @@ SHELL = /bin/sh
 dev:
 	pnpm dev --host
 
+.PHONY: lint-and-test
+lint-and-test: lint test
+
 .PHONY: lint
 lint: lint-pre-commit lint-format lint-types
 
@@ -20,8 +23,16 @@ lint-format:
 lint-types:
 	pnpm types:check
 
+.PHONY: test
+test:
+	pnpm test:run
+
+.PHONY: test-dev
+test-dev:
+	pnpm test:dev
+
 .PHONY: dist
-dist: lint clean
+dist: lint test clean
 	pnpm build
 
 .PHONY: preview
