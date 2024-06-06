@@ -18,7 +18,7 @@
  * @param {number} s seconds
  * @returns {Clock}
  */
-function secondsToClock(s) {
+export function secondsToClock(s) {
   let seconds = s % 60;
   const m = (s - seconds) / 60;
   let minutes = m % 60;
@@ -36,7 +36,7 @@ function secondsToClock(s) {
  * @param {Time} time
  * @returns {number} seconds
  */
-function timeToSeconds(time) {
+export function timeToSeconds(time) {
   validateTime(time);
   let hours = "0";
   let minutes = "0";
@@ -60,7 +60,7 @@ function timeToSeconds(time) {
 /**
  * @param {Time} time
  */
-function validateTime(time) {
+export function validateTime(time) {
   if (time === "" || !/^(\d+h)?(\d+m)?(\d+s)?$/.test(time)) {
     throw new Error("invalid time format");
   }
