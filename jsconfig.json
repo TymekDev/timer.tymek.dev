@@ -4,5 +4,8 @@
     "moduleResolution": "Bundler",
     "checkJs": true,
     "strict": true
-  }
+  },
+  "include": [
+    "src/**/*"
+  ]
 }
