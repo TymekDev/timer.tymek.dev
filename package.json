@@ -13,7 +13,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "format:check": "prettier --check **/*.html **/*.js **/*.css",
-    "format:fix": "prettier --write **/*.html **/*.js **/*.css"
+    "format:fix": "prettier --write **/*.html **/*.js **/*.css",
+    "types:check": "tsc --project jsconfig.json"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
@@ -22,6 +23,7 @@
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.3",
+    "typescript": "^5.4.5",
     "vite": "^5.2.0"
   }
 }
