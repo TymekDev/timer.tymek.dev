@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "target": "ES6",
+    "moduleResolution": "Bundler",
     "checkJs": true,
     "strict": true
   }
