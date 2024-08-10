@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "ES6",
     "moduleResolution": "Bundler",
-    "checkJs": true,
-    "strict": true
+    "checkJs": true
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["src/**/*"]
 }

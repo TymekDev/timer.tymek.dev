@@ -1,8 +1,5 @@
 class Countdown extends HTMLElement {
   static observedAttributes = ["seconds", "minutes", "hours", "active"];
-  /**
-   * @type {NodeJS.Timeout|undefined}
-   */
   #interval;
 
   constructor() {
