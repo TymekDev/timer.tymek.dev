@@ -13,6 +13,7 @@ function setCountdown({ seconds, minutes, hours }) {
   countdown.setAttribute("seconds", String(seconds));
   countdown.setAttribute("minutes", String(minutes));
   countdown.setAttribute("hours", String(hours));
+  setTimeout(() => countdown.start(), 0);
 }
 
 let seconds = 600;
