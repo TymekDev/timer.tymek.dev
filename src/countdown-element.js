@@ -14,7 +14,13 @@ class Countdown extends HTMLElement {
     const template = /** @type {HTMLTemplateElement} */ (
       document.getElementById("template-countdown")
     );
-    this.append(template.content);
+    this.appendChild(template.content);
+    this.querySelector(".btn-start")?.addEventListener("click", () => {
+      this.start();
+    });
+    this.querySelector(".btn-stop")?.addEventListener("click", () => {
+      this.stop();
+    });
   }
 
   /**
