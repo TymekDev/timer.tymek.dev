@@ -9,9 +9,9 @@
 
 /**
  * @param {number} s seconds
- * @returns {Clock}
+ * @returns {{seconds: number, minutes: number, hours: number}}
  */
-export function secondsToClock(s) {
+export function secondsToHMS(s) {
   let seconds = s % 60;
   const m = (s - seconds) / 60;
   let minutes = m % 60;
@@ -22,7 +22,7 @@ export function secondsToClock(s) {
     console.warn("capping time at 99:59:59");
   }
   const hours = h % 100;
-  return new Clock(seconds, minutes, hours);
+  return { seconds, minutes, hours };
 }
 
 /**
@@ -56,51 +56,5 @@ export function timeToSeconds(time) {
 export function validateTime(time) {
   if (time === "" || !/^(\d+h)?(\d+m)?(\d+s)?$/.test(time)) {
     throw new Error("invalid time format");
-  }
-}
-
-export class Clock {
-  /**
-   * @param {number} seconds
-   * @param {number} minutes
-   * @param {number} hours
-   */
-  constructor(seconds, minutes, hours) {
-    this.seconds = seconds;
-    this.minutes = minutes;
-    this.hours = hours;
-  }
-
-  tick() {
-    if (this.seconds > 0) {
-      this.seconds -= 1;
-      return;
-    }
-    if (this.minutes > 0) {
-      this.seconds = 59;
-      this.minutes -= 1;
-      return;
-    }
-    if (this.hours > 0) {
-      this.seconds = 59;
-      this.minutes = 59;
-      this.hours -= 1;
-      return;
-    }
-    throw new Error("time has run out");
-  }
-
-  /**
-   * @param {(seconds: number, minutes: number, hours: number) => void} callback
-   */
-  run(callback) {
-    this.interval = setInterval(() => {
-      this.tick();
-      callback(this.seconds, this.minutes, this.hours);
-    }, 1000);
-  }
-
-  stop() {
-    clearInterval(this.interval);
   }
 }

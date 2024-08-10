@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { secondsToClock, timeToSeconds, validateTime, Clock } from "./time";
+import { secondsToHMS, timeToSeconds, validateTime } from "./time";
 
 test.each([
   "123h123m123s",
@@ -44,36 +44,5 @@ test.each([
   [3600 * 99 + 59 * 60 + 59, { seconds: 59, minutes: 59, hours: 99 }],
   [3600 * 9999, { seconds: 59, minutes: 59, hours: 99 }],
 ])("secondsToClock(%d) -> %s", (seconds, expected) => {
-  expect(secondsToClock(seconds)).toEqual(expected);
-});
-
-test.each([
-  [
-    { seconds: 1, minutes: 0, hours: 0 },
-    { seconds: 0, minutes: 0, hours: 0 },
-  ],
-  [
-    { seconds: 0, minutes: 1, hours: 0 },
-    { seconds: 59, minutes: 0, hours: 0 },
-  ],
-  [
-    { seconds: 0, minutes: 0, hours: 1 },
-    { seconds: 59, minutes: 59, hours: 0 },
-  ],
-  [
-    { seconds: 3, minutes: 2, hours: 1 },
-    { seconds: 2, minutes: 2, hours: 1 },
-  ],
-])(
-  "Clock($seconds, $minutes, $hours).tick() reduces time by 1 second",
-  (seconds, expected) => {
-    const clock = new Clock(seconds.seconds, seconds.minutes, seconds.hours);
-    clock.tick();
-    expect(clock).toEqual(expected);
-  },
-);
-
-test("Clock.tick() throws when it has 0 seconds, 0 minutes, and 0 hours", () => {
-  const clock = new Clock(0, 0, 0);
-  expect(() => clock.tick()).to.throw;
+  expect(secondsToHMS(seconds)).toEqual(expected);
 });
