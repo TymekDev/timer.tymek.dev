@@ -1,5 +1,9 @@
 import { timeToSeconds, secondsToHMS } from "./time.js";
 
+const countdown = /** @type {Countdown} */ (
+  document.getElementById("countdown")
+);
+
 /**
  * @param {Object} hms
  * @param {number} hms.seconds
@@ -7,13 +11,9 @@ import { timeToSeconds, secondsToHMS } from "./time.js";
  * @param {number} hms.hours
  */
 function setCountdown({ seconds, minutes, hours }) {
-  const countdown = /** @type {Countdown} */ (
-    document.getElementById("countdown")
-  );
   countdown.setAttribute("seconds", String(seconds));
   countdown.setAttribute("minutes", String(minutes));
   countdown.setAttribute("hours", String(hours));
-  setTimeout(() => countdown.start(), 0);
 }
 
 let seconds = 600;
@@ -21,6 +21,7 @@ const timeFromQuery = new URLSearchParams(location.search).get("t");
 if (timeFromQuery !== null) {
   try {
     seconds = timeToSeconds(timeFromQuery);
+    setTimeout(() => countdown.start(), 0);
   } catch {
     console.warn(`query parameter t=${timeFromQuery} has an invalid format`);
   }
