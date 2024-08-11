@@ -16,13 +16,23 @@
         ></span
         >:<span style="--value: var(--seconds)"></span>
       </div>
-      <menu>
-        <button class="btn-start btn">Start</button>
-        <button class="btn-stop btn">Stop</button>
-      </menu>
     </template>
   </head>
   <body>
     <countdown-element id="countdown"></countdown-element>
+    <menu>
+      <button
+        onclick="document.getElementById('countdown').start()"
+        class="btn"
+      >
+        Start
+      </button>
+      <button
+        onclick="document.getElementById('countdown').stop()"
+        class="btn"
+      >
+        Stop
+      </button>
+    </menu>
   </body>
 </html>

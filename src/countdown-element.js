@@ -12,12 +12,6 @@ class Countdown extends HTMLElement {
       document.getElementById("template-countdown")
     );
     this.appendChild(template.content);
-    this.querySelector(".btn-start")?.addEventListener("click", () => {
-      this.start();
-    });
-    this.querySelector(".btn-stop")?.addEventListener("click", () => {
-      this.stop();
-    });
   }
 
   /**
