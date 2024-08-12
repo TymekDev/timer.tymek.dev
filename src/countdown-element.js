@@ -14,6 +14,10 @@ class Countdown extends HTMLElement {
     this.appendChild(template.content);
   }
 
+  disconnectedCallback() {
+    clearInterval(this.#interval);
+  }
+
   /**
    * @param {string} name
    * @param {string} oldValue
@@ -26,6 +30,11 @@ class Countdown extends HTMLElement {
     }
 
     if (name === "state" && newValue === "stopped") {
+      clearInterval(this.#interval);
+      return;
+    }
+
+    if (name === "state" && newValue === "done") {
       clearInterval(this.#interval);
       return;
     }
@@ -78,6 +87,8 @@ class Countdown extends HTMLElement {
       this.setAttribute("hours", String(hours - 1));
       return true;
     }
+
+    this.setAttribute("state", "done");
 
     return false;
   }
