@@ -10,15 +10,17 @@
     <script src="./index.js" type="module"></script>
     <script src="./countdown-element.js" type="module"></script>
     <template id="template-countdown">
-      <div class="countdown font-mono">
-        <span style="--value: var(--hours)"></span>:<span
-          style="--value: var(--minutes)"
-        ></span
-        >:<span style="--value: var(--seconds)"></span>
+      <div class="flex flex-col items-center gap-y-4">
+        <div class="countdown font-mono text-5xl">
+          <span style="--value: var(--hours)"></span>:<span
+            style="--value: var(--minutes)"
+          ></span
+          >:<span style="--value: var(--seconds)"></span>
+        </div>
       </div>
     </template>
   </head>
-  <body>
+  <body class="flex h-dvh flex-col items-center justify-center gap-y-8">
     <countdown-element id="countdown"></countdown-element>
     <menu>
       <button
@@ -27,10 +29,7 @@
       >
         Start
       </button>
-      <button
-        onclick="document.getElementById('countdown').stop()"
-        class="btn"
-      >
+      <button onclick="document.getElementById('countdown').stop()" class="btn">
         Stop
       </button>
       <button
