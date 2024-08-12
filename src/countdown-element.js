@@ -32,7 +32,7 @@ class Countdown extends HTMLElement {
    * @param {string} newValue
    */
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "state" && newValue === "active") {
+    if (name === "state" && oldValue !== "active" && newValue === "active") {
       const id = setInterval(() => this.#tick(), 1000);
       this.#stop = () => {
         clearInterval(id);
