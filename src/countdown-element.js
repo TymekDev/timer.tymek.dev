@@ -62,6 +62,17 @@ class Countdown extends HTMLElement {
     }
   }
 
+  /**
+   * @param {number} seconds
+   * @param {number} minutes
+   * @param {number} hours
+   */
+  set(seconds, minutes, hours) {
+    this.setAttribute("seconds", String(seconds ?? 0));
+    this.setAttribute("minutes", String(minutes ?? 0));
+    this.setAttribute("hours", String(hours ?? 0));
+  }
+
   start() {
     this.setAttribute("state", "active");
   }
