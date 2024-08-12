@@ -1,13 +1,13 @@
 class Countdown extends HTMLElement {
-  static observedAttributes = ["seconds", "minutes", "hours", "active"];
-  #interval;
+  static observedAttributes = ["seconds", "minutes", "hours", "state"];
+  #interval; // to be used in clearInterval() to stop the countdown
 
   constructor() {
     super();
   }
 
   connectedCallback() {
-    this.setAttribute("active", "false");
+    this.stop();
     const template = /** @type {HTMLTemplateElement} */ (
       document.getElementById("template-countdown")
     );
@@ -20,12 +20,12 @@ class Countdown extends HTMLElement {
    * @param {string} newValue
    */
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "active" && newValue === "true") {
+    if (name === "state" && newValue === "active") {
       this.#interval = setInterval(() => this.#tick(), 1000);
       return;
     }
 
-    if (name === "active" && newValue === "false") {
+    if (name === "state" && newValue === "stopped") {
       clearInterval(this.#interval);
       return;
     }
@@ -47,11 +47,11 @@ class Countdown extends HTMLElement {
   }
 
   start() {
-    this.setAttribute("active", "true");
+    this.setAttribute("state", "active");
   }
 
   stop() {
-    this.setAttribute("active", "false");
+    this.setAttribute("state", "stopped");
   }
 
   /** Advance the countdown by 1 second.
