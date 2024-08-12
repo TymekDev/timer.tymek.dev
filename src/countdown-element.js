@@ -1,6 +1,10 @@
 class Countdown extends HTMLElement {
   static observedAttributes = ["seconds", "minutes", "hours", "state"];
-  #interval; // to be used in clearInterval() to stop the countdown
+
+  /** Function to stop the countdown
+   * @type {() => void}
+   */
+  #stop = () => {};
 
   constructor() {
     super();
@@ -15,7 +19,7 @@ class Countdown extends HTMLElement {
   }
 
   disconnectedCallback() {
-    clearInterval(this.#interval);
+    this.#stop();
   }
 
   /**
@@ -25,17 +29,20 @@ class Countdown extends HTMLElement {
    */
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === "state" && newValue === "active") {
-      this.#interval = setInterval(() => this.#tick(), 1000);
+      const id = setInterval(() => this.#tick(), 1000);
+      this.#stop = () => {
+        clearInterval(id);
+      };
       return;
     }
 
     if (name === "state" && newValue === "stopped") {
-      clearInterval(this.#interval);
+      this.#stop();
       return;
     }
 
     if (name === "state" && newValue === "done") {
-      clearInterval(this.#interval);
+      this.#stop();
       return;
     }
 
