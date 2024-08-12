@@ -5,6 +5,10 @@ class Countdown extends HTMLElement {
    * @type {() => void}
    */
   #stop = () => {};
+  /** Arguments Countdown.set() was last called with
+   * @type {{seconds: number, minutes: number, hours: number}}
+   */
+  #lastSetArgs;
 
   constructor() {
     super();
@@ -68,6 +72,7 @@ class Countdown extends HTMLElement {
    * @param {number} hours
    */
   set(seconds, minutes, hours) {
+    this.#lastSetArgs = { seconds, minutes, hours };
     this.setAttribute("seconds", String(seconds ?? 0));
     this.setAttribute("minutes", String(minutes ?? 0));
     this.setAttribute("hours", String(hours ?? 0));
@@ -79,6 +84,15 @@ class Countdown extends HTMLElement {
 
   stop() {
     this.setAttribute("state", "stopped");
+  }
+
+  restart() {
+    this.set(
+      this.#lastSetArgs.seconds,
+      this.#lastSetArgs.minutes,
+      this.#lastSetArgs.hours,
+    );
+    this.start();
   }
 
   /** Advance the countdown by 1 second.
