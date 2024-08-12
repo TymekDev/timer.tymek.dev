@@ -87,6 +87,7 @@ class Countdown extends HTMLElement {
   }
 
   restart() {
+    this.stop();
     this.set(
       this.#lastSetArgs.seconds,
       this.#lastSetArgs.minutes,
